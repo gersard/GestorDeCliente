@@ -31,4 +31,15 @@ public final class Funciones {
 
     }
 
+    public static boolean validarLogin(String user, String pass){
+        Realm realm = Realm.getDefaultInstance();
+        Usuario usuario = new Usuario();
+        usuario = realm.where(Usuario.class).equalTo("username",user).equalTo("password",pass).findFirst();
+        if (usuario == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 }

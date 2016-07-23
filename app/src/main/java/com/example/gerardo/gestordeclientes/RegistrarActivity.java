@@ -1,6 +1,7 @@
 package com.example.gerardo.gestordeclientes;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -50,7 +51,10 @@ public class RegistrarActivity extends AppCompatActivity {
                         ,editRegNombre.getText().toString(),editRegApellido.getText().toString(),
                         editRegEmail.getText().toString());
 
-                Toast.makeText(RegistrarActivity.this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(RegistrarActivity.this,LoginActivity.class);
+                intent.putExtra("reg",true);
+                startActivity(intent);
             }else{
                 Toast.makeText(RegistrarActivity.this, "Las contraseñas son diferentes", Toast.LENGTH_SHORT).show();
             }
@@ -105,13 +109,6 @@ public class RegistrarActivity extends AppCompatActivity {
     private class AsyncTaskRegistrar extends AsyncTask<String,Void,Void>{
         ProgressDialog dialog = new ProgressDialog(RegistrarActivity.this);
 
-
-        @Override
-        protected Void doInBackground(String... params) {
-            Funciones.registrarUsuario(params[0],params[1],params[2],params[3],params[4]);
-            return null;
-        }
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -120,6 +117,12 @@ public class RegistrarActivity extends AppCompatActivity {
             dialog.show();
         }
 
+
+        @Override
+        protected Void doInBackground(String... params) {
+            Funciones.registrarUsuario(params[0],params[1],params[2],params[3],params[4]);
+            return null;
+        }
 
         @Override
         protected void onPostExecute(Void aVoid) {

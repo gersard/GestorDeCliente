@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,10 +29,25 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        try{
+            Bundle extras = getIntent().getExtras();
+            if (extras.getBoolean("reg")){
+                Toast.makeText(LoginActivity.this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+            }
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
     }
 
     @OnClick(R.id.btn_ingresar)
     public void ingresar() {
+        if (Funciones.validarLogin(editUsuario.getText().toString(),editPass.getText().toString())){
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(LoginActivity.this, "Datos inválidos", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnClick(R.id.btn_registrar)
