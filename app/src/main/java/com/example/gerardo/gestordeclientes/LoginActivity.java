@@ -1,5 +1,6 @@
 package com.example.gerardo.gestordeclientes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -35,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_registrar)
     public void registrar() {
+        Intent intent = new Intent(LoginActivity.this,RegistrarActivity.class);
+        startActivity(intent);
     }
 
 }
