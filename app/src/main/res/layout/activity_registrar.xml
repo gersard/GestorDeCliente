@@ -43,7 +43,8 @@
             android:background="@drawable/edit_text_background"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:hint="Usuario" />
+            android:hint="Usuario"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/edit_reg_password"
@@ -102,7 +103,7 @@
             android:inputType="textEmailAddress" />
 
         <Button
-            android:id="@+id/btn_ingresar"
+            android:id="@+id/btn_reg_registrar"
             android:layout_width="160dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
