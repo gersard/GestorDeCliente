@@ -1,0 +1,137 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:context="com.example.gerardo.gestordeclientes.ui.fragment.AgregarFragment">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="-10dp"
+            android:src="@drawable/registro_black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Nuevo Cliente"
+            android:textColor="@android:color/black"
+            android:textSize="26sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="10dp"
+            android:text="Datos Cliente:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edit_form_rut"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_text_background_white"
+            android:gravity="center"
+            android:hint="@string/form_hint_rut"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/edit_form_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background_white"
+            android:gravity="center"
+            android:hint="@string/form_hint_nombre"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/edit_form_apellido"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_text_background_white"
+            android:gravity="center"
+            android:hint="@string/form_hint_apellido"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/edit_form_telefono"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background_white"
+            android:gravity="center"
+            android:hint="@string/form_hint_telefono"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/edit_form_correo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_text_background_white"
+            android:gravity="center"
+            android:hint="@string/form_hint_correo"
+            android:inputType="textPersonName" />
+
+        <Spinner
+            android:id="@+id/spinner_form_comuna"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="14dp"
+            android:layout_marginTop="10dp"
+            android:entries="@array/comunas" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="10dp"
+            android:text="Datos Motocicleta:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinner_form_marca_moto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp" />
+
+        <Spinner
+            android:id="@+id/spinner_form_modelo_moto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp" />
+
+        <Spinner
+            android:id="@+id/spinner_form_año_moto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:id="@+id/btn_reg_registrar"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_background"
+            android:text="Registrar Cliente"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>

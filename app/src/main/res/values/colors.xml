@@ -9,4 +9,7 @@
     <color name="item_drawer_press">#202020</color>
     <color name="colorTextDrawer">#DBDBDB</color>
 
+    <color name="editTextTransparecy">#b45b5b5b</color>
+    <color name="editTextTransparecyLogin">#20ffffff</color>
+
 </resources>
