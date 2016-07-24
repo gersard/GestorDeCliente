@@ -12,7 +12,7 @@ import io.realm.Realm;
  */
 public final class Funciones {
 
-
+    //METODOS PARA EL USUARIO
     public static void registrarUsuario(final String user, final String pass, final String nombre, final String apellido, final String email){
         final String fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
         Realm realm = Realm.getDefaultInstance();
@@ -30,7 +30,16 @@ public final class Funciones {
         });
 
     }
-
+    public static boolean validarUsuario(String user){
+        Realm realm = Realm.getDefaultInstance();
+        Usuario usuario = new Usuario();
+        usuario = realm.where(Usuario.class).equalTo("username",user).findFirst();
+        if (usuario == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
     public static boolean validarLogin(String user, String pass){
         Realm realm = Realm.getDefaultInstance();
         Usuario usuario = new Usuario();
@@ -41,5 +50,7 @@ public final class Funciones {
             return true;
         }
     }
+
+    //METODOS PARA EL CLIENTE
 
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inicio"
+            android:icon="@android:drawable/btn_star"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_agregar"
+            android:icon="@android:drawable/btn_star"
+            android:title="Agregar Digimon" />
+        <item
+            android:id="@+id/nav_digimon"
+            android:icon="@android:drawable/btn_star"
+            android:title="Ver los Digimon" />
+        <item
+            android:id="@+id/nav_actualizar"
+            android:icon="@android:drawable/btn_star"
+            android:title="Relleno" />
+    </group>
+
+
+</menu>

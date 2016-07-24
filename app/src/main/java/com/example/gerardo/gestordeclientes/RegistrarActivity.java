@@ -41,20 +41,25 @@ public class RegistrarActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_reg_registrar)
     public void onClick() {
-        if (validarIngreso(editRegUsername.getText().toString(),editRegPassword.getText().toString(),
-                editRegPassword2.getText().toString(),editRegNombre.getText().toString(),editRegApellido.getText().toString(),
-                editRegEmail.getText().toString())){
+        if (validarIngreso(editRegUsername.getText().toString().trim(),editRegPassword.getText().toString().trim(),
+                editRegPassword2.getText().toString().trim(),editRegNombre.getText().toString().trim()
+                ,editRegApellido.getText().toString().trim(), editRegEmail.getText().toString().trim())){
 
             if (validarPassword(editRegPassword.getText().toString().trim(),editRegPassword2.getText().toString().trim())){
-                //REGISTRO EN SEGUNDO PLANO
-                new AsyncTaskRegistrar().execute(editRegUsername.getText().toString(),editRegPassword.getText().toString()
-                        ,editRegNombre.getText().toString(),editRegApellido.getText().toString(),
-                        editRegEmail.getText().toString());
+                if (!Funciones.validarUsuario(editRegUsername.getText().toString().trim())){
+                    //REGISTRO EN SEGUNDO PLANO
+                    new AsyncTaskRegistrar().execute(editRegUsername.getText().toString().trim(),editRegPassword.getText().toString().trim()
+                            ,editRegNombre.getText().toString().trim(),editRegApellido.getText().toString().trim(),
+                            editRegEmail.getText().toString().trim());
 
 
-                Intent intent = new Intent(RegistrarActivity.this,LoginActivity.class);
-                intent.putExtra("reg",true);
-                startActivity(intent);
+                    Intent intent = new Intent(RegistrarActivity.this,LoginActivity.class);
+                    intent.putExtra("reg",true);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(RegistrarActivity.this, "El usuario ya existe", Toast.LENGTH_SHORT).show();
+                }
+
             }else{
                 Toast.makeText(RegistrarActivity.this, "Las contraseñas son diferentes", Toast.LENGTH_SHORT).show();
             }
