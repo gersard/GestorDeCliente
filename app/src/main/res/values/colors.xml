@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#141415</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorGrey">#8e8e8e</color>
+
+    <color name="background_drawer">#303030</color>
+    <color name="item_drawer_press">#202020</color>
+    <color name="colorTextDrawer">#DBDBDB</color>
+
 </resources>

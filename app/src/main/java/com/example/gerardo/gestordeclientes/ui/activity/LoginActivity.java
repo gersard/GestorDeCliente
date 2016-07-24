@@ -1,4 +1,4 @@
-package com.example.gerardo.gestordeclientes;
+package com.example.gerardo.gestordeclientes.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.gerardo.gestordeclientes.Funciones;
+import com.example.gerardo.gestordeclientes.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

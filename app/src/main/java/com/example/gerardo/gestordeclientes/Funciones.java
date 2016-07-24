@@ -1,11 +1,14 @@
 package com.example.gerardo.gestordeclientes;
 
+import com.example.gerardo.gestordeclientes.model.Cliente;
 import com.example.gerardo.gestordeclientes.model.Usuario;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Created by Gerardo on 23/07/2016.
@@ -52,5 +55,11 @@ public final class Funciones {
     }
 
     //METODOS PARA EL CLIENTE
+    public static RealmResults<Cliente> getClientes(){
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Cliente> listaClientes = realm.where(Cliente.class).findAll();
+        listaClientes.sort("nombre", Sort.ASCENDING);
+        return listaClientes;
+    }
 
 }
