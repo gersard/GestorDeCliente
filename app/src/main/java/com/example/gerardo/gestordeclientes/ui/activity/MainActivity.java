@@ -1,12 +1,15 @@
 package com.example.gerardo.gestordeclientes.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.example.gerardo.gestordeclientes.R;
 import com.example.gerardo.gestordeclientes.ui.fragment.AgregarFragment;
@@ -15,10 +18,12 @@ import com.example.gerardo.gestordeclientes.ui.fragment.MainFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Bind(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @Bind(R.id.nav_view)
+    NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +39,18 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         displayView(R.id.nav_inicio);
+        navView.setNavigationItemSelectedListener(this);
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     public void displayView(int viewId) {
@@ -49,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.nav_agregar:
                 fragment = new AgregarFragment();
-                title = "Agregar Cliente";
+                title = "Registrar Cliente";
                 break;
 //            case R.id.nav_digimon:
 //                fragment = new DigimonFragment();
@@ -69,4 +84,10 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.closeDrawers();
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        displayView(item.getItemId());
+        return true;
+    }
 }

@@ -18,6 +18,7 @@
 
     <!-- COMUNAS -->
     <string-array name="comunas">
+        <item>Comuna</item>
         <item>Cerrillos</item>
         <item>Cerro Navia</item>
         <item>Conchalí</item>

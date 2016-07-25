@@ -94,6 +94,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="14dp"
             android:layout_marginTop="10dp"
+            android:background="@color/editTextTransparecy"
             android:entries="@array/comunas" />
 
         <TextView
@@ -125,7 +126,7 @@
             android:layout_marginBottom="10dp" />
 
         <Button
-            android:id="@+id/btn_reg_registrar"
+            android:id="@+id/btn_form_registrar"
             android:layout_width="180dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"

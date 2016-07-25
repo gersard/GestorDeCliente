@@ -1,6 +1,7 @@
 package com.example.gerardo.gestordeclientes;
 
 import com.example.gerardo.gestordeclientes.model.Cliente;
+import com.example.gerardo.gestordeclientes.model.Moto;
 import com.example.gerardo.gestordeclientes.model.Usuario;
 
 import java.text.SimpleDateFormat;
@@ -84,6 +85,30 @@ public final class Funciones {
         } catch (Exception e) {
         }
         return validacion;
+    }
+    public static void registrarCliente(final Cliente clienteExt){
+        final String fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Cliente cliente = realm.createObject(Cliente.class);
+                cliente.setRut(clienteExt.getRut());
+                cliente.setNombre(clienteExt.getNombre());
+                cliente.setApellido(clienteExt.getApellido());
+                cliente.setTelefono(clienteExt.getTelefono());
+                cliente.setCorreo(clienteExt.getCorreo());
+                cliente.setComuna(clienteExt.getComuna());
+
+                Moto moto = realm.createObject(Moto.class);
+                moto.setIdMoto(fecha);
+                moto.setMarca(clienteExt.getMoto().getMarca());
+                moto.setModelo(clienteExt.getMoto().getModelo());
+                moto.setAño(clienteExt.getMoto().getAño());
+
+                cliente.setMoto(moto);
+            }
+        });
     }
 
 }
