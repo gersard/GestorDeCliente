@@ -1,13 +1,18 @@
 package com.example.gerardo.gestordeclientes;
 
 import com.example.gerardo.gestordeclientes.model.Cliente;
+import com.example.gerardo.gestordeclientes.model.Marca;
+import com.example.gerardo.gestordeclientes.model.Modelo;
 import com.example.gerardo.gestordeclientes.model.Moto;
 import com.example.gerardo.gestordeclientes.model.Usuario;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -110,5 +115,51 @@ public final class Funciones {
             }
         });
     }
+
+    //METODOS PARA LA MOTO
+    public static void registrarMoto(final Moto moto){
+        final String idMoto = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Moto moto1 = realm.createObject(Moto.class);
+                moto1.setIdMoto(idMoto);
+                moto1.setMarca(moto.getMarca());
+                moto1.setModelo(moto.getModelo());
+                moto1.setAño(moto.getAño());
+            }
+        });
+    }
+    public static ArrayList<Marca> getMarcasMoto(){
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Marca> listaMarcas = realm.where(Marca.class).findAllSorted("nombreMarca",Sort.DESCENDING);
+        ArrayList<Marca> marcas = new ArrayList<>(listaMarcas);
+        return marcas;
+    }
+    public static Marca getModelosByMarca( String marca){
+        Realm realm = Realm.getDefaultInstance();
+        Marca listaModelos = realm.where(Marca.class).equalTo("nombreMarca",marca).findFirst();
+        return listaModelos;
+    }
+
+//    public static void addMarca(){
+//        final String fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+//        Realm realm = Realm.getDefaultInstance();
+//        realm.executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                Marca marca = realm.createObject(Marca.class);
+//                marca.setIdMarca(fecha);
+//                marca.setNombreMarca("Honda");
+//                RealmList<Modelo> modelos = new RealmList<Modelo>();
+//                Modelo mo = realm.createObject(Modelo.class);
+//                mo.setIdModelo("aaaaaaaaaaaaabbbbbbbbbbbbbccccccccccc");
+//                mo.setNombreModelo("XBR 250");
+//                modelos.add(mo);
+//                marca.setModelos(modelos);
+//            }
+//        });
+//    }
 
 }

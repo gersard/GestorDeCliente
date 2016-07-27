@@ -1,5 +1,6 @@
 package com.example.gerardo.gestordeclientes.model;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -11,8 +12,8 @@ public class Moto extends RealmObject {
     @PrimaryKey
     private String idMoto;
 
-    private String marca;
-    private String modelo;
+    private Marca marca;
+    private Modelo modelo;
     private int año;
 
     public Moto() {
@@ -26,19 +27,19 @@ public class Moto extends RealmObject {
         this.idMoto = idMoto;
     }
 
-    public String getMarca() {
+    public Marca getMarca() {
         return marca;
     }
 
-    public void setMarca(String marca) {
+    public void setMarca(Marca marca) {
         this.marca = marca;
     }
 
-    public String getModelo() {
+    public Modelo getModelo() {
         return modelo;
     }
 
-    public void setModelo(String modelo) {
+    public void setModelo(Modelo modelo) {
         this.modelo = modelo;
     }
 

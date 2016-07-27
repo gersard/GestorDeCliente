@@ -17,7 +17,10 @@ import android.widget.Toast;
 import com.example.gerardo.gestordeclientes.Funciones;
 import com.example.gerardo.gestordeclientes.R;
 import com.example.gerardo.gestordeclientes.model.Cliente;
+import com.example.gerardo.gestordeclientes.model.Marca;
+import com.example.gerardo.gestordeclientes.model.Modelo;
 import com.example.gerardo.gestordeclientes.model.Moto;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,15 +47,20 @@ public class AgregarFragment extends Fragment {
     @Bind(R.id.edit_form_correo)
     EditText editCorreo;
     @Bind(R.id.spinner_form_comuna)
-    Spinner spnComuna;
+    MaterialSpinner spnComuna;
     @Bind(R.id.spinner_form_marca_moto)
-    Spinner spnMarcaMoto;
+    MaterialSpinner spnMarcaMoto;
     @Bind(R.id.spinner_form_modelo_moto)
-    Spinner spnModeloMoto;
+    MaterialSpinner spnModeloMoto;
     @Bind(R.id.spinner_form_año_moto)
-    Spinner spnAnioMoto;
+    MaterialSpinner spnAnioMoto;
     @Bind(R.id.btn_form_registrar)
     Button btnRegistrar;
+
+    String comunaSeleccionada;
+    String marcaMotoSeleccionada;
+    String modeloMotoSeleccionada;
+    int añoMotoSeleccionada;
 
     public AgregarFragment() {
         // Required empty public constructor
@@ -64,6 +72,33 @@ public class AgregarFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_agregar_actualizar, container, false);
         ButterKnife.bind(this, root);
+        rellenarSpinners();
+
+        spnComuna.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                comunaSeleccionada = item.toString().trim();
+            }
+        });
+        spnAnioMoto.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                añoMotoSeleccionada = Integer.parseInt(item.toString().trim());
+            }
+        });
+        spnMarcaMoto.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                marcaMotoSeleccionada = item.toString().trim();
+                rellenarSpinnerModelo(marcaMotoSeleccionada);
+            }
+        });
+        spnModeloMoto.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                modeloMotoSeleccionada = item.toString().trim();
+            }
+        });
 
         return root;
     }
@@ -76,40 +111,48 @@ public class AgregarFragment extends Fragment {
 
     @OnClick(R.id.btn_form_registrar)
     public void onClick() {
-        String rut = editRut.getText().toString().trim();
-        String nombre = editNombre.getText().toString().trim();
-        String apellido = editApellido.getText().toString().trim();
-        int telefono = Integer.parseInt(editTelefono.getText().toString().trim());
-        String correo = editCorreo.getText().toString().trim();
-        String comuna = spnComuna.getSelectedItem().toString().trim();
-        String marca = spnMarcaMoto.getSelectedItem().toString().trim();
-        String modelo = spnModeloMoto.getSelectedItem().toString().trim();
-        int año = Integer.parseInt(spnAnioMoto.getSelectedItem().toString().trim());
+        try{
+            String rut = editRut.getText().toString().trim();
+            String nombre = editNombre.getText().toString().trim();
+            String apellido = editApellido.getText().toString().trim();
+            int telefono = Integer.parseInt(editTelefono.getText().toString().trim());
+            String correo = editCorreo.getText().toString().trim();
+            String comuna = comunaSeleccionada;
+            String marca = marcaMotoSeleccionada;
+            String modelo = modeloMotoSeleccionada;
+            int año = añoMotoSeleccionada;
 
-        if (validarIngreso(nombre,rut,apellido,telefono,correo,comuna,marca,modelo,año)){
-            if (Funciones.validarRut(rut)){
-                Cliente cliente = new Cliente();
-                cliente.setNombre(nombre);
-                cliente.setRut(rut);
-                cliente.setApellido(apellido);
-                cliente.setTelefono(telefono);
-                cliente.setCorreo(correo);
-                cliente.setComuna(comuna);
+            if (validarIngreso(nombre,rut,apellido,telefono,correo,comuna,marca,modelo,año)){
+                if (Funciones.validarRut(rut)){
+                    Cliente cliente = new Cliente();
+                    cliente.setNombre(nombre);
+                    cliente.setRut(rut);
+                    cliente.setApellido(apellido);
+                    cliente.setTelefono(telefono);
+                    cliente.setCorreo(correo);
+                    cliente.setComuna(comuna);
 
-                Moto moto = new Moto();
-                moto.setMarca(marca);
-                moto.setModelo(modelo);
-                moto.setAño(año);
+                    Moto moto = new Moto();
+                    Marca marcas = new Marca();
+                    marcas.setNombreMarca(marca);
+                    Modelo model = new Modelo();
+                    model.setNombreModelo(modelo);
+                    moto.setMarca(marcas);
+                    moto.setModelo(model);
+                    moto.setAño(año);
 
-                cliente.setMoto(moto);
+                    cliente.setMoto(moto);
 
-                new AsyncTaskRegistrarCliente().execute(cliente);
+                    new AsyncTaskRegistrarCliente().execute(cliente);
 
+                }else{
+                    Toast.makeText(getActivity(), "Rut inválido", Toast.LENGTH_SHORT).show();
+                }
             }else{
-                Toast.makeText(getActivity(), "Rut inválido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Debe completar todos los campos", Toast.LENGTH_SHORT).show();
             }
-        }else{
-            Toast.makeText(getActivity(), "Debe completar todos los campos", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
 
@@ -149,15 +192,35 @@ public class AgregarFragment extends Fragment {
 
     }
 
-    private void rellenarSpinnerAño(){
+    private void rellenarSpinners(){
+        //SPINNER COMUNA
+        spnComuna.setItems(getActivity().getResources().getStringArray(R.array.comunas));
+        //SPINEER AÑO
         List<String> years = new ArrayList<String>();
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
         for (int i = 1980; i <= thisYear; i++) {
             years.add(Integer.toString(i));
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, years);
+        spnAnioMoto.setItems(years);
+        //SPINNER MARCAS
+        List<String> marcas = new ArrayList<>();
+        marcas.add("Marca");
+        for (Marca marca : Funciones.getMarcasMoto()){
+            marcas.add(marca.getNombreMarca());
+        }
+        spnMarcaMoto.setItems(marcas);
 
-        spnAnioMoto.setAdapter(adapter);
+    }
+
+    private void rellenarSpinnerModelo(String marca){
+        List<String> modelos = new ArrayList<>();
+        modelos.add("Modelo");
+        Marca m = Funciones.getModelosByMarca(marca);
+
+        for (Modelo n : m.getModelos()){
+            modelos.add(n.getNombreModelo());
+        }
+        spnModeloMoto.setItems(modelos);
     }
 
     private class AsyncTaskRegistrarCliente extends AsyncTask<Cliente,Void,Void> {

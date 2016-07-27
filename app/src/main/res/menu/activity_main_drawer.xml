@@ -11,14 +11,39 @@
             android:icon="@android:drawable/btn_star"
             android:title="Agregar " />
         <item
-            android:id="@+id/nav_digimon"
-            android:icon="@android:drawable/btn_star"
-            android:title="Relleno" />
-        <item
             android:id="@+id/nav_actualizar"
             android:icon="@android:drawable/btn_star"
+            android:title="Actualizar" />
+        <item
+            android:id="@+id/nav_j"
+            android:icon="@android:drawable/btn_star"
             android:title="Relleno" />
+
+        <item
+            android:id="@+id/configuration_section"
+            android:title="Prueba" >
+            <menu>
+                <item
+                    android:id="@+id/nav_log_out"
+                    android:icon="@android:drawable/ic_lock_power_off"
+                    android:title="Item dentro del menu"
+                    />
+            </menu>
+        </item>
     </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@android:drawable/stat_sys_headset"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@android:drawable/btn_star_big_on"
+                android:title="Send" />
+        </menu>
+    </item>
 
 
 </menu>

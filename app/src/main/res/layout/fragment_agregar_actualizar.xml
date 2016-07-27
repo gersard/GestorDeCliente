@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -88,14 +89,15 @@
             android:hint="@string/form_hint_correo"
             android:inputType="textPersonName" />
 
-        <Spinner
+        <com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/spinner_form_comuna"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="14dp"
             android:layout_marginTop="10dp"
-            android:background="@color/editTextTransparecy"
-            android:entries="@array/comunas" />
+            android:gravity="center_horizontal"
+            app:ms_arrow_tint="@color/colorTextDrawer"
+            app:ms_background_color="@color/editTextTransparecy" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -107,23 +109,30 @@
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
-        <Spinner
+        <com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/spinner_form_marca_moto"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            app:ms_arrow_tint="@color/colorTextDrawer"
+            app:ms_background_color="@color/editTextTransparecy"
             android:layout_marginBottom="10dp" />
 
-        <Spinner
+        <com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/spinner_form_modelo_moto"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            app:ms_arrow_tint="@color/colorTextDrawer"
+            app:ms_background_color="@color/editTextTransparecy"
             android:layout_marginBottom="10dp" />
 
-        <Spinner
+        <com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/spinner_form_año_moto"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            app:ms_arrow_tint="@color/colorTextDrawer"
+            app:ms_dropdown_max_height="250dp"
+            app:ms_background_color="@color/editTextTransparecy" />
 
         <Button
             android:id="@+id/btn_form_registrar"

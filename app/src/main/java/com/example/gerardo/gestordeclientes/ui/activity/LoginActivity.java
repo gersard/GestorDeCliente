@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_ingresar)
     public void ingresar() {
-        if (Funciones.validarLogin(editUsuario.getText().toString(),editPass.getText().toString())){
+        if (Funciones.validarLogin(editUsuario.getText().toString().trim(),editPass.getText().toString().trim())){
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }else{
