@@ -91,6 +91,16 @@ public final class Funciones {
         }
         return validacion;
     }
+    public static boolean validarIfClientExist(String rut){
+        Realm realm = Realm.getDefaultInstance();
+        Cliente cliente = new Cliente();
+        cliente = realm.where(Cliente.class).equalTo("rut",rut).findFirst();
+        if (cliente == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
     public static void registrarCliente(final Cliente clienteExt){
         final String fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
         Realm realm = Realm.getDefaultInstance();
@@ -107,8 +117,12 @@ public final class Funciones {
 
                 Moto moto = realm.createObject(Moto.class);
                 moto.setIdMoto(fecha);
-                moto.setMarca(clienteExt.getMoto().getMarca());
-                moto.setModelo(clienteExt.getMoto().getModelo());
+                Marca marca = realm.createObject(Marca.class);
+                marca.setNombreMarca(clienteExt.getMoto().getMarca().getNombreMarca());
+                Modelo modelo = realm.createObject(Modelo.class);
+                modelo.setNombreModelo(clienteExt.getMoto().getModelo().getNombreModelo());
+                moto.setMarca(marca);
+                moto.setModelo(modelo);
                 moto.setAño(clienteExt.getMoto().getAño());
 
                 cliente.setMoto(moto);

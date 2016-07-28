@@ -3,6 +3,7 @@ package com.example.gerardo.gestordeclientes.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,10 @@ import android.widget.TextView;
 
 import com.example.gerardo.gestordeclientes.Funciones;
 import com.example.gerardo.gestordeclientes.R;
+import com.example.gerardo.gestordeclientes.adapter.ListaClientesAdapter;
 import com.example.gerardo.gestordeclientes.model.Cliente;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,6 +34,8 @@ public class MainFragment extends Fragment {
     RecyclerView recyclerMain;
     RealmResults<Cliente> listaClientes;
 
+    ListaClientesAdapter adapter;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -47,7 +53,10 @@ public class MainFragment extends Fragment {
         }else{
             txtTitulo.setText("Clientes");
         }
-
+        ArrayList<Cliente> cl = new ArrayList<>(Funciones.getClientes());
+        adapter = new ListaClientesAdapter(getActivity(),cl);
+        recyclerMain.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerMain.setAdapter(adapter);
         return root;
     }
 

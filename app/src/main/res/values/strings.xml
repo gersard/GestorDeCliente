@@ -16,6 +16,10 @@
     <string name="form_hint_telefono">Telefono</string>
     <string name="form_hint_correo">Correo</string>
 
+    <string name="item_cliente_rut">Rut: %1$s</string>
+    <string name="item_cliente_marca">Moto: %1$s</string>
+    <string name="item_cliente_modelo">Modelo: %1$s</string>
+
     <!-- COMUNAS -->
     <string-array name="comunas">
         <item>Comuna</item>

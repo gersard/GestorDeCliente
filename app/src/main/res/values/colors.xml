@@ -12,4 +12,8 @@
     <color name="editTextTransparecy">#b45b5b5b</color>
     <color name="editTextTransparecyLogin">#20ffffff</color>
 
+    <color name="item_client_background">#e6e6e6</color>
+    <color name="item_client_header">#b3b3b3</color>
+    <color name="item_client_color_text_header">#252525</color>
+
 </resources>

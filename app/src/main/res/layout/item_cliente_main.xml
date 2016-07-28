@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="135dp"
+    android:layout_marginTop="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="5dp">
+
+    <!-- LINEAR VERTICAL BASE -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/card_edge"
+        android:orientation="vertical">
+
+        <!-- RELATIVE HEADER -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/card_edge_header">
+
+            <TextView
+                android:id="@+id/item_cliente_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="Gerardo Mascayano"
+                android:textColor="@color/item_client_color_text_header"
+                android:textSize="23sp" />
+
+        </RelativeLayout>
+
+        <!-- LINEAR RUT  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_cliente_rut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:drawableLeft="@drawable/ic_rut"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_rut"
+                android:gravity="center"
+                android:text="Rut: 189537883"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <!-- LINEAR MOTO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_cliente_marca"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_weight="10"
+                android:drawableLeft="@drawable/ic_moto"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_moto"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:lines="1"
+                android:text="Moto: Yamaha"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_weight="3"
+                android:src="@drawable/cell_arrow" />
+
+        </LinearLayout>
+
+        <!-- LINEAR DETALLE MOTO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_cliente_modelo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:drawableLeft="@drawable/ic_moto"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_moto"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:lines="1"
+                android:text="Modelo: XBR125"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

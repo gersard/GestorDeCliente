@@ -4,6 +4,7 @@ package com.example.gerardo.gestordeclientes.ui.fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,12 +61,19 @@ public class AgregarFragment extends Fragment {
     String comunaSeleccionada;
     String marcaMotoSeleccionada;
     String modeloMotoSeleccionada;
-    int añoMotoSeleccionada;
+    int añoMotoSeleccionada = 0;
+    List<String> modelos;
 
     public AgregarFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        modelos = new ArrayList<>();
+        modelos.add("Modelo");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -111,7 +119,7 @@ public class AgregarFragment extends Fragment {
 
     @OnClick(R.id.btn_form_registrar)
     public void onClick() {
-        try{
+        try {
             String rut = editRut.getText().toString().trim();
             String nombre = editNombre.getText().toString().trim();
             String apellido = editApellido.getText().toString().trim();
@@ -122,81 +130,88 @@ public class AgregarFragment extends Fragment {
             String modelo = modeloMotoSeleccionada;
             int año = añoMotoSeleccionada;
 
-            if (validarIngreso(nombre,rut,apellido,telefono,correo,comuna,marca,modelo,año)){
-                if (Funciones.validarRut(rut)){
-                    Cliente cliente = new Cliente();
-                    cliente.setNombre(nombre);
-                    cliente.setRut(rut);
-                    cliente.setApellido(apellido);
-                    cliente.setTelefono(telefono);
-                    cliente.setCorreo(correo);
-                    cliente.setComuna(comuna);
+            if (validarIngreso(nombre, rut, apellido, telefono, correo, comuna, marca, modelo, año)) {
+                if (Funciones.validarRut(rut)) {
+                    if (!Funciones.validarIfClientExist(rut)){
+                        Cliente cliente = new Cliente();
+                        cliente.setNombre(nombre);
+                        cliente.setRut(rut);
+                        cliente.setApellido(apellido);
+                        cliente.setTelefono(telefono);
+                        cliente.setCorreo(correo);
+                        cliente.setComuna(comuna);
 
-                    Moto moto = new Moto();
-                    Marca marcas = new Marca();
-                    marcas.setNombreMarca(marca);
-                    Modelo model = new Modelo();
-                    model.setNombreModelo(modelo);
-                    moto.setMarca(marcas);
-                    moto.setModelo(model);
-                    moto.setAño(año);
+                        Moto moto = new Moto();
 
-                    cliente.setMoto(moto);
+                        Marca marcas = new Marca();
+                        marcas.setNombreMarca(marca);
 
-                    new AsyncTaskRegistrarCliente().execute(cliente);
+                        Modelo model = new Modelo();
+                        model.setNombreModelo(modelo);
 
-                }else{
+                        moto.setMarca(marcas);
+                        moto.setModelo(model);
+                        moto.setAño(año);
+
+                        cliente.setMoto(moto);
+
+                        new AsyncTaskRegistrarCliente().execute(cliente);
+                        Toast.makeText(getActivity(), "Cliente agregado exitosamente", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getActivity(), "Cliente ya se encuentra registrado", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
                     Toast.makeText(getActivity(), "Rut inválido", Toast.LENGTH_SHORT).show();
                 }
-            }else{
+            } else {
                 Toast.makeText(getActivity(), "Debe completar todos los campos", Toast.LENGTH_SHORT).show();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
     }
 
-    private boolean validarIngreso(String nombre,String rut,String apellido,int telefono,
-                                   String correo,String comuna,String marca,String modelo,int año){
-        if (nombre.equals("")){
+    private boolean validarIngreso(String nombre, String rut, String apellido, int telefono,
+                                   String correo, String comuna, String marca, String modelo, int año) {
+        if (nombre.equals("")) {
             return false;
         }
-        if (rut.equals("")){
+        if (rut.equals("")) {
             return false;
         }
-        if (apellido.equals("")){
+        if (apellido.equals("")) {
             return false;
         }
-        if (telefono == 0){
+        if (telefono == 0) {
             return false;
         }
-        if (correo.equals("")){
+        if (correo.equals("")) {
             return false;
         }
-        if (comuna.equals("Comuna")){
+        if (comuna.equals("Comuna")) {
             return false;
         }
-        if (marca.equals("Marca")){
+        if (marca.equals("Marca")) {
             return false;
         }
-        if (modelo.equals("Modelo")){
+        if (modelo.equals("Modelo")) {
             return false;
         }
-        if (año == 0){
+        if (año == 0) {
             return false;
         }
         return true;
 
     }
-
-    private void rellenarSpinners(){
+    private void rellenarSpinners() {
         //SPINNER COMUNA
         spnComuna.setItems(getActivity().getResources().getStringArray(R.array.comunas));
         //SPINEER AÑO
         List<String> years = new ArrayList<String>();
+        years.add("Año");
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
         for (int i = 1980; i <= thisYear; i++) {
             years.add(Integer.toString(i));
@@ -205,34 +220,37 @@ public class AgregarFragment extends Fragment {
         //SPINNER MARCAS
         List<String> marcas = new ArrayList<>();
         marcas.add("Marca");
-        for (Marca marca : Funciones.getMarcasMoto()){
+        for (Marca marca : Funciones.getMarcasMoto()) {
             marcas.add(marca.getNombreMarca());
         }
         spnMarcaMoto.setItems(marcas);
+        //SPINNER MODELOS
+        spnModeloMoto.setItems(modelos);
 
     }
+    private void rellenarSpinnerModelo(String marca) {
 
-    private void rellenarSpinnerModelo(String marca){
-        List<String> modelos = new ArrayList<>();
-        modelos.add("Modelo");
         Marca m = Funciones.getModelosByMarca(marca);
 
-        for (Modelo n : m.getModelos()){
+        for (Modelo n : m.getModelos()) {
             modelos.add(n.getNombreModelo());
         }
         spnModeloMoto.setItems(modelos);
     }
 
-    private class AsyncTaskRegistrarCliente extends AsyncTask<Cliente,Void,Void> {
-        ProgressDialog dialog = new ProgressDialog(getActivity());
+
+    private class AsyncTaskRegistrarCliente extends AsyncTask<Cliente, Void, Void> {
+        ProgressDialog dialog = new ProgressDialog(getContext());
 
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.setMessage("Registrando...");
-            dialog.setCancelable(false);
-            dialog.show();
+//
+//            dialog.setMessage("Registrando...");
+//            dialog.setCancelable(false);
+//            dialog.show();
+
         }
 
         @Override
@@ -242,11 +260,10 @@ public class AgregarFragment extends Fragment {
         }
 
 
-
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            dialog.dismiss();
+//            dialog.dismiss();
         }
 
 

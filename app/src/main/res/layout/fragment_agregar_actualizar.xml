@@ -97,7 +97,8 @@
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             app:ms_arrow_tint="@color/colorTextDrawer"
-            app:ms_background_color="@color/editTextTransparecy" />
+            app:ms_background_color="@color/editTextTransparecy"
+            app:ms_dropdown_max_height="250dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,17 +114,19 @@
             android:id="@+id/spinner_form_marca_moto"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
             app:ms_arrow_tint="@color/colorTextDrawer"
             app:ms_background_color="@color/editTextTransparecy"
-            android:layout_marginBottom="10dp" />
+            app:ms_dropdown_max_height="250dp" />
 
         <com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/spinner_form_modelo_moto"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
             app:ms_arrow_tint="@color/colorTextDrawer"
             app:ms_background_color="@color/editTextTransparecy"
-            android:layout_marginBottom="10dp" />
+            app:ms_dropdown_max_height="250dp" />
 
         <com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/spinner_form_año_moto"
@@ -131,8 +134,8 @@
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
             app:ms_arrow_tint="@color/colorTextDrawer"
-            app:ms_dropdown_max_height="250dp"
-            app:ms_background_color="@color/editTextTransparecy" />
+            app:ms_background_color="@color/editTextTransparecy"
+            app:ms_dropdown_max_height="250dp" />
 
         <Button
             android:id="@+id/btn_form_registrar"

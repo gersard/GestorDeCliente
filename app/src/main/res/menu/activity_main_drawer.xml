@@ -21,27 +21,37 @@
 
         <item
             android:id="@+id/configuration_section"
-            android:title="Prueba" >
+            android:title="Motos" >
             <menu>
                 <item
                     android:id="@+id/nav_log_out"
                     android:icon="@android:drawable/ic_lock_power_off"
-                    android:title="Item dentro del menu"
+                    android:title="Agregar"
+                    />
+                <item
+                    android:id="@+id/nav_lo"
+                    android:icon="@android:drawable/ic_lock_power_off"
+                    android:title="Actualizar"
+                    />
+                <item
+                    android:id="@+id/nav_log_odut"
+                    android:icon="@android:drawable/ic_lock_power_off"
+                    android:title="Agregar Marca"
                     />
             </menu>
         </item>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Settings">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@android:drawable/stat_sys_headset"
-                android:title="Share" />
+                android:title="Preferencias" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@android:drawable/btn_star_big_on"
-                android:title="Send" />
+                android:title="Logout" />
         </menu>
     </item>
 
