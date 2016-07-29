@@ -61,12 +61,6 @@ public final class Funciones {
     }
 
     //METODOS PARA EL CLIENTE
-    public static RealmResults<Cliente> getClientes(){
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<Cliente> listaClientes = realm.where(Cliente.class).findAll();
-        listaClientes.sort("nombre", Sort.ASCENDING);
-        return listaClientes;
-    }
     public static boolean validarRut(String rut) {
 
         boolean validacion = false;
@@ -129,10 +123,36 @@ public final class Funciones {
             }
         });
     }
-    public static Cliente getClienteByRut(String rut){
+    public static void actualizarCliente (final Cliente clienteExt){
+        final String fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
         Realm realm = Realm.getDefaultInstance();
-        Cliente cliente = realm.where(Cliente.class).equalTo("rut",rut).findFirst();
-        return cliente;
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Cliente cliente = realm.where(Cliente.class).equalTo("rut",clienteExt.getRut()).findFirst();
+                cliente.setNombre(clienteExt.getNombre());
+                cliente.setApellido(clienteExt.getApellido());
+                cliente.setTelefono(clienteExt.getTelefono());
+                cliente.setCorreo(clienteExt.getCorreo());
+                cliente.setComuna(clienteExt.getComuna());
+
+                Moto moto = realm.createObject(Moto.class);
+                moto.setIdMoto(fecha);
+
+                Marca marca = realm.createObject(Marca.class);
+                marca.setNombreMarca(clienteExt.getMoto().getMarca().getNombreMarca());
+
+                Modelo modelo = realm.createObject(Modelo.class);
+                modelo.setNombreModelo(clienteExt.getMoto().getModelo().getNombreModelo());
+
+                moto.setMarca(marca);
+                moto.setModelo(modelo);
+                moto.setAño(clienteExt.getMoto().getAño());
+
+                cliente.setMoto(moto);
+
+            }
+        });
     }
     public static void eliminarCliente(String rut){
         Realm realm = Realm.getDefaultInstance();
@@ -143,6 +163,17 @@ public final class Funciones {
                 cliente.deleteAllFromRealm();
             }
         });
+    }
+    public static Cliente getClienteByRut(String rut){
+        Realm realm = Realm.getDefaultInstance();
+        Cliente cliente = realm.where(Cliente.class).equalTo("rut",rut).findFirst();
+        return cliente;
+    }
+    public static RealmResults<Cliente> getClientes(){
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Cliente> listaClientes = realm.where(Cliente.class).findAll();
+        listaClientes.sort("nombre", Sort.ASCENDING);
+        return listaClientes;
     }
     public static RealmResults<Cliente> getClientesPorParametro(String parametro, String valor){
         Realm realm = Realm.getDefaultInstance();

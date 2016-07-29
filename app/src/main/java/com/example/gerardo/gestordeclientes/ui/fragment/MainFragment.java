@@ -100,7 +100,14 @@ public class MainFragment extends Fragment {
                 if (direction == ItemTouchHelper.LEFT){
                     adapter.deleteCliente(position);
                 }else{
-                    //Actualizar
+                    ActualizarFragment actualizarFragment = new ActualizarFragment();
+                    Bundle args = new Bundle();
+                    args.putString("rut",adapter.getRutCliente(position));
+                    actualizarFragment.setArguments(args);
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right)
+                            .replace(R.id.content_frame, actualizarFragment)
+                            .commit();
                 }
             }
 

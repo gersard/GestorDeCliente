@@ -2,6 +2,7 @@ package com.example.gerardo.gestordeclientes.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
@@ -11,6 +12,9 @@ import android.widget.Toast;
 
 import com.example.gerardo.gestordeclientes.Funciones;
 import com.example.gerardo.gestordeclientes.R;
+import com.example.gerardo.gestordeclientes.ui.activity.MainActivity;
+import com.example.gerardo.gestordeclientes.ui.fragment.DetailClienteFragment;
+import com.example.gerardo.gestordeclientes.ui.fragment.MainFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import butterknife.Bind;
@@ -37,6 +41,7 @@ public class BuscarDialog extends Dialog {
     public BuscarDialog(Context context, String origen) {
         super(context);
         this.origen = origen;
+        parametro = "rut";
     }
 
     @Override
@@ -60,12 +65,39 @@ public class BuscarDialog extends Dialog {
             }
         });
 
+
     }
 
-
+    private boolean validarDatos(String param, String valor){
+        if (param == null){
+            return false;
+        }
+        if (valor.equals("")){
+            return false;
+        }
+        return true;
+    }
 
     @OnClick(R.id.dialog_btn_buscar)
     public void onClick() {
-        Toast.makeText(getContext(), String.valueOf(Funciones.getClientesPorParametro(parametro.toLowerCase(),editValor.getText().toString()).size()), Toast.LENGTH_SHORT).show();
+        if (validarDatos(parametro,editValor.getText().toString())){
+
+            if (Funciones.getClientesPorParametro(parametro.toLowerCase(),editValor.getText().toString()).size()>0){
+                if (origen.equals("buscar")){
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    intent.putExtra("parametro",parametro);
+                    intent.putExtra("valor",editValor.getText().toString().trim());
+                    getContext().startActivity(intent);
+                }else{
+
+                }
+            }else{
+                Toast.makeText(getContext(), "No existen clientes", Toast.LENGTH_SHORT).show();
+            }
+
+        }else{
+            Toast.makeText(getContext(), "Rellene todos los campos antes de buscar", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
