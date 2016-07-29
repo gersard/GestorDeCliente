@@ -144,6 +144,12 @@ public final class Funciones {
             }
         });
     }
+    public static RealmResults<Cliente> getClientesPorParametro(String parametro, String valor){
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Cliente> listaClientes = realm.where(Cliente.class).equalTo(parametro,valor).findAll();
+        listaClientes.sort("nombre",Sort.ASCENDING);
+        return listaClientes;
+    }
 
     //METODOS PARA LA MOTO
     public static void registrarMoto(final Moto moto){

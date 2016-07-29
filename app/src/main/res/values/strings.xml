@@ -20,6 +20,19 @@
     <string name="item_cliente_marca">Moto: %1$s</string>
     <string name="item_cliente_modelo">Modelo: %1$s</string>
 
+    <!-- PARAMETROS -->
+
+    <string-array name="parametros">
+        <item>Rut</item>
+        <item>Nombre</item>
+        <item>Apellido</item>
+        <item>Telefono</item>
+        <item>Comuna</item>
+        <item>Marca</item>
+        <item>Modelo</item>
+        <item>Año</item>
+    </string-array>
+
     <!-- COMUNAS -->
     <string-array name="comunas">
         <item>Comuna</item>
