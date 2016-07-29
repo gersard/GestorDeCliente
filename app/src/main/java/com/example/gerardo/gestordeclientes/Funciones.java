@@ -134,6 +134,16 @@ public final class Funciones {
         Cliente cliente = realm.where(Cliente.class).equalTo("rut",rut).findFirst();
         return cliente;
     }
+    public static void eliminarCliente(String rut){
+        Realm realm = Realm.getDefaultInstance();
+        final RealmResults<Cliente> cliente = realm.where(Cliente.class).equalTo("rut",rut).findAll();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                cliente.deleteAllFromRealm();
+            }
+        });
+    }
 
     //METODOS PARA LA MOTO
     public static void registrarMoto(final Moto moto){

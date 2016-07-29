@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.gerardo.gestordeclientes.Funciones;
 import com.example.gerardo.gestordeclientes.R;
 import com.example.gerardo.gestordeclientes.model.Cliente;
 
@@ -66,6 +67,13 @@ public class ListaClientesAdapter extends RecyclerView.Adapter<ListaClientesAdap
     public String getRutCliente(int posicion){
         Cliente current = listaClientes.get(posicion);
         return current.getRut();
+    }
+    public void deleteCliente (int posicion){
+        Cliente current = listaClientes.get(posicion);
+        Funciones.eliminarCliente(current.getRut());
+        listaClientes.remove(posicion);
+        notifyItemRemoved(posicion);
+        notifyItemRangeChanged(posicion,listaClientes.size());
     }
 
 

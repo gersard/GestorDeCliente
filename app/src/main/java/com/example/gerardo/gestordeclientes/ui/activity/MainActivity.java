@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
-            ft.addToBackStack(null);
             ft.commit();
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
