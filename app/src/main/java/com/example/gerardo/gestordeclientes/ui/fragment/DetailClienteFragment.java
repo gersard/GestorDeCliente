@@ -56,6 +56,7 @@ public class DetailClienteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_detail_cliente, container, false);
+        ButterKnife.bind(this, root);
 
         if (!rut.equals("")){
             cargarDatos(rut);
@@ -63,7 +64,6 @@ public class DetailClienteFragment extends Fragment {
             txtClientDetailNombreApellido.setText("Sin información del cliente");
         }
 
-        ButterKnife.bind(this, root);
         return root;
     }
 

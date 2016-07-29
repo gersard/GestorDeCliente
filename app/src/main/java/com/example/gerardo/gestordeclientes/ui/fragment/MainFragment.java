@@ -67,6 +67,7 @@ public class MainFragment extends Fragment {
                 detailClienteFragment.setArguments(args);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, detailClienteFragment)
+                        .setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right)
                         .commit();
             }
         });
