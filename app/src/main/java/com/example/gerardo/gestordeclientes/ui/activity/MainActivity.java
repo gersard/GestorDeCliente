@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.example.gerardo.gestordeclientes.R;
 import com.example.gerardo.gestordeclientes.ui.fragment.AgregarFragment;
+import com.example.gerardo.gestordeclientes.ui.fragment.BuscarFragment;
 import com.example.gerardo.gestordeclientes.ui.fragment.MainFragment;
 
 import butterknife.Bind;
@@ -66,10 +67,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = new AgregarFragment();
                 title = "Registrar Cliente";
                 break;
-//            case R.id.nav_digimon:
-//                fragment = new DigimonFragment();
-//                title = "Digimons";
+//            case R.id.nav_actualizar:
+//                fragment = new BuscarFragment();
+//                title = "Buscar Cliente";
 //                break;
+            case R.id.nav_buscar:
+                fragment = new BuscarFragment();
+                title = "Buscar Cliente";
+                break;
+            case R.id.nav_agregar_moto:
+                fragment = new BuscarFragment();
+                title = "Buscar Cliente";
+                break;
         }
 
         if (fragment != null) {

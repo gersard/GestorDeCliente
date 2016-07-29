@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="-16dp"
+        android:src="@drawable/ic_user" />
+
+    <TextView
+        android:id="@+id/txt_client_detail_nombre_apellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Gerardo Mascayano"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/txt_client_detail_rut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:drawableLeft="@drawable/ic_rut"
+        android:drawablePadding="6dp"
+        android:drawableStart="@drawable/ic_rut"
+        android:gravity="center_vertical"
+        android:text="Rut: 18953788-3"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txt_client_detail_telefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:drawableLeft="@android:drawable/ic_menu_call"
+        android:drawableStart="@android:drawable/ic_menu_call"
+        android:gravity="center_vertical"
+        android:text="+56985881343"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txt_client_detail_correo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@android:drawable/ic_dialog_email"
+        android:drawableStart="@android:drawable/ic_dialog_email"
+        android:gravity="center_vertical"
+        android:text="gerardo.mascayano@gmail.com"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txt_client_detail_comuna"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:drawableLeft="@drawable/ic_city"
+        android:drawablePadding="4dp"
+        android:drawableStart="@drawable/ic_city"
+        android:gravity="center_vertical"
+        android:text="Puente Alto"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="6dp"
+        android:text="Informacion motocicleta"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txt_client_detail_marca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_moto"
+        android:drawableStart="@drawable/ic_moto"
+        android:gravity="center_vertical"
+        android:text="Yamaha"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txt_client_detail_modelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:drawableLeft="@drawable/ic_moto"
+        android:drawableStart="@drawable/ic_moto"
+        android:gravity="center_vertical"
+        android:text="125xr"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txt_client_detail_año"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_calendar"
+        android:drawablePadding="6dp"
+        android:drawableStart="@drawable/ic_calendar"
+        android:gravity="center_vertical"
+        android:text="2010" />
+
+
+</LinearLayout>

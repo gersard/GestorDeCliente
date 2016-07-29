@@ -129,6 +129,11 @@ public final class Funciones {
             }
         });
     }
+    public static Cliente getClienteByRut(String rut){
+        Realm realm = Realm.getDefaultInstance();
+        Cliente cliente = realm.where(Cliente.class).equalTo("rut",rut).findFirst();
+        return cliente;
+    }
 
     //METODOS PARA LA MOTO
     public static void registrarMoto(final Moto moto){

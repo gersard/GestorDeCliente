@@ -19,11 +19,14 @@ import butterknife.ButterKnife;
 /**
  * Created by Gerardo on 27/07/2016.
  */
-public class ListaClientesAdapter extends RecyclerView.Adapter<ListaClientesAdapter.ClienteViewHolder> {
+public class ListaClientesAdapter extends RecyclerView.Adapter<ListaClientesAdapter.ClienteViewHolder>
+        implements View.OnClickListener{
 
 
     Context context;
     ArrayList<Cliente> listaClientes;
+
+    private View.OnClickListener listener;
 
     public ListaClientesAdapter(Context context, ArrayList<Cliente> listaClientes) {
         this.context = context;
@@ -33,7 +36,7 @@ public class ListaClientesAdapter extends RecyclerView.Adapter<ListaClientesAdap
     @Override
     public ClienteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.item_cliente_main,parent,false);
-//        itemView.setOnClickListener(this);
+        itemView.setOnClickListener(this);
         return new ClienteViewHolder(itemView);
     }
 
@@ -50,6 +53,21 @@ public class ListaClientesAdapter extends RecyclerView.Adapter<ListaClientesAdap
     public int getItemCount() {
         return listaClientes.size();
     }
+
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
+    }
+    @Override
+    public void onClick(View v) {
+        if(listener != null){
+            listener.onClick(v);
+        }
+    }
+    public String getRutCliente(int posicion){
+        Cliente current = listaClientes.get(posicion);
+        return current.getRut();
+    }
+
 
     public class ClienteViewHolder extends RecyclerView.ViewHolder{
 

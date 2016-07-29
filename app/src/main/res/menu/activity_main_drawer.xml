@@ -15,26 +15,26 @@
             android:icon="@android:drawable/btn_star"
             android:title="Actualizar" />
         <item
-            android:id="@+id/nav_j"
+            android:id="@+id/nav_buscar"
             android:icon="@android:drawable/btn_star"
-            android:title="Relleno" />
+            android:title="Buscar" />
 
         <item
             android:id="@+id/configuration_section"
             android:title="Motos" >
             <menu>
                 <item
-                    android:id="@+id/nav_log_out"
+                    android:id="@+id/nav_agregar_moto"
                     android:icon="@android:drawable/ic_lock_power_off"
-                    android:title="Agregar"
+                    android:title="Agregar Moto"
                     />
                 <item
-                    android:id="@+id/nav_lo"
+                    android:id="@+id/nav_actualizar_moto"
                     android:icon="@android:drawable/ic_lock_power_off"
-                    android:title="Actualizar"
+                    android:title="Actualizar Moto"
                     />
                 <item
-                    android:id="@+id/nav_log_odut"
+                    android:id="@+id/nav_agregar_marca"
                     android:icon="@android:drawable/ic_lock_power_off"
                     android:title="Agregar Marca"
                     />
@@ -45,11 +45,11 @@
     <item android:title="Settings">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_preferencias"
                 android:icon="@android:drawable/stat_sys_headset"
                 android:title="Preferencias" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_logout"
                 android:icon="@android:drawable/btn_star_big_on"
                 android:title="Logout" />
         </menu>

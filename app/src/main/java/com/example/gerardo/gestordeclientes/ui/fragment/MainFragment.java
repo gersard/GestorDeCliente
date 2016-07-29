@@ -57,6 +57,20 @@ public class MainFragment extends Fragment {
         adapter = new ListaClientesAdapter(getActivity(),cl);
         recyclerMain.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerMain.setAdapter(adapter);
+
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DetailClienteFragment detailClienteFragment = new DetailClienteFragment();
+                Bundle args = new Bundle();
+                args.putString("rut",adapter.getRutCliente(recyclerMain.getChildAdapterPosition(v)));
+                detailClienteFragment.setArguments(args);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, detailClienteFragment)
+                        .commit();
+            }
+        });
+
         return root;
     }
 
