@@ -61,7 +61,7 @@ public class MainFragment extends Fragment {
         }else{
             txtTitulo.setText("Clientes");
         }
-        ArrayList<Cliente> cl = new ArrayList<>(Funciones.getClientes());
+        ArrayList<Cliente> cl = new ArrayList<>(listaClientes);
         adapter = new ListaClientesAdapter(getActivity(),cl);
         recyclerMain.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerMain.setAdapter(adapter);
@@ -74,7 +74,7 @@ public class MainFragment extends Fragment {
                 args.putString("rut",adapter.getRutCliente(recyclerMain.getChildAdapterPosition(v)));
                 detailClienteFragment.setArguments(args);
                 getFragmentManager().beginTransaction()
-                        .setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right)
+                        .setCustomAnimations(android.R.anim.slide_out_right,android.R.anim.slide_in_left)
                         .replace(R.id.content_frame, detailClienteFragment)
                         .commit();
             }
@@ -105,7 +105,7 @@ public class MainFragment extends Fragment {
                     args.putString("rut",adapter.getRutCliente(position));
                     actualizarFragment.setArguments(args);
                     getFragmentManager().beginTransaction()
-                            .setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right)
+                            .setCustomAnimations(android.R.anim.slide_out_right,android.R.anim.slide_in_left)
                             .replace(R.id.content_frame, actualizarFragment)
                             .commit();
                 }

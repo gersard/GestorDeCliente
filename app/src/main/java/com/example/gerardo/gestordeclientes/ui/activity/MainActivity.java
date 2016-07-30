@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.gerardo.gestordeclientes.R;
-import com.example.gerardo.gestordeclientes.ui.dialog.BuscarDialog;
 import com.example.gerardo.gestordeclientes.ui.fragment.AgregarFragment;
 import com.example.gerardo.gestordeclientes.ui.fragment.BuscarFragment;
 import com.example.gerardo.gestordeclientes.ui.fragment.MainFragment;
@@ -73,13 +72,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                title = "Buscar Cliente";
 //                break;
             case R.id.nav_buscar:
-//                fragment = new BuscarFragment();
-//                title = "Buscar Cliente";
-                new BuscarDialog(MainActivity.this,"buscar").show();
-                break;
-            case R.id.nav_agregar_moto:
                 fragment = new BuscarFragment();
                 title = "Buscar Cliente";
+                break;
+            case R.id.nav_agregar_moto:
+//                fragment = new BuscarFragment();
+//                title = "Buscar Cliente";
                 break;
         }
 
