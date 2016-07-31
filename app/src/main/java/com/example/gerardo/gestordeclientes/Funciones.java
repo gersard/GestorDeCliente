@@ -183,20 +183,6 @@ public final class Funciones {
     }
 
     //METODOS PARA LA MOTO
-    public static void registrarMoto(final Moto moto){
-        final String idMoto = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-        Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                Moto moto1 = realm.createObject(Moto.class);
-                moto1.setIdMoto(idMoto);
-                moto1.setMarca(moto.getMarca());
-                moto1.setModelo(moto.getModelo());
-                moto1.setAño(moto.getAño());
-            }
-        });
-    }
     public static ArrayList<Marca> getMarcasMoto(){
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Marca> listaMarcas = realm.where(Marca.class).findAllSorted("nombreMarca",Sort.DESCENDING);
@@ -207,6 +193,27 @@ public final class Funciones {
         Realm realm = Realm.getDefaultInstance();
         Marca listaModelos = realm.where(Marca.class).equalTo("nombreMarca",marca).findFirst();
         return listaModelos;
+    }
+    public static void registrarMoto(final String nMarca, final String nModelo){
+        final String fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Marca marca = realm.createObject(Marca.class);
+                marca.setIdMarca(fecha);
+                marca.setNombreMarca(nMarca);
+
+                Modelo modelo = realm.createObject(Modelo.class);
+                modelo.setIdModelo(fecha);
+                modelo.setNombreModelo(nModelo);
+
+                RealmList<Modelo> lModelo = new RealmList<>();
+                lModelo.add(modelo);
+
+                marca.setModelos(lModelo);
+            }
+        });
     }
 
 //    public static void addMarca(){

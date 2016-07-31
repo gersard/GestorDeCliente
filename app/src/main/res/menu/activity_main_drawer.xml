@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single"
-        android:title="Clientes">
-        <item
-            android:id="@+id/nav_inicio"
-            android:icon="@drawable/ic_drawer_home"
-            android:title="Inicio" />
-        <item
-            android:id="@+id/nav_agregar"
-            android:icon="@drawable/ic_drawer_add"
-            android:title="Agregar " />
-        <item
-            android:id="@+id/nav_actualizar"
-            android:icon="@drawable/ic_drawer_update"
-            android:title="Actualizar" />
-        <item
-            android:id="@+id/nav_buscar"
-            android:icon="@drawable/ic_drawer_search"
-            android:title="Buscar" />
-
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/clientes"
+            android:title="Clientes">
+            <item
+                android:id="@+id/nav_inicio"
+                android:icon="@drawable/ic_drawer_home"
+                android:title="Inicio" />
+            <item
+                android:id="@+id/nav_agregar"
+                android:icon="@drawable/ic_drawer_add"
+                android:title="Agregar Cliente" />
+            <item
+                android:id="@+id/nav_actualizar"
+                android:icon="@drawable/ic_drawer_update"
+                android:title="Actualizar Cliente" />
+            <item
+                android:id="@+id/nav_buscar"
+                android:icon="@drawable/ic_drawer_search"
+                android:title="Buscar Cliente" />
+        </item>
         <item
             android:id="@+id/configuration_section"
             android:title="Motos" >

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.example.gerardo.gestordeclientes.R;
 import com.example.gerardo.gestordeclientes.ui.fragment.AgregarFragment;
+import com.example.gerardo.gestordeclientes.ui.fragment.AgregarMotoFragment;
 import com.example.gerardo.gestordeclientes.ui.fragment.BuscarFragment;
 import com.example.gerardo.gestordeclientes.ui.fragment.MainFragment;
 
@@ -76,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 title = "Buscar Cliente";
                 break;
             case R.id.nav_agregar_moto:
-//                fragment = new BuscarFragment();
-//                title = "Buscar Cliente";
+                fragment = new AgregarMotoFragment();
+                title = "Agregar Moto";
                 break;
         }
 
