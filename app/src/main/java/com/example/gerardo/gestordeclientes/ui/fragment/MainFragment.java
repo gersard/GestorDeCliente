@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.daimajia.swipe.SwipeLayout;
 import com.example.gerardo.gestordeclientes.Funciones;
 import com.example.gerardo.gestordeclientes.R;
 import com.example.gerardo.gestordeclientes.adapter.ListaClientesAdapter;

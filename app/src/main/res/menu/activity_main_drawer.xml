@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:title="Clientes">
         <item
             android:id="@+id/nav_inicio"
-            android:icon="@android:drawable/btn_star"
+            android:icon="@drawable/ic_drawer_home"
             android:title="Inicio" />
         <item
             android:id="@+id/nav_agregar"
-            android:icon="@android:drawable/btn_star"
+            android:icon="@drawable/ic_drawer_add"
             android:title="Agregar " />
         <item
             android:id="@+id/nav_actualizar"
-            android:icon="@android:drawable/btn_star"
+            android:icon="@drawable/ic_drawer_update"
             android:title="Actualizar" />
         <item
             android:id="@+id/nav_buscar"
-            android:icon="@android:drawable/btn_star"
+            android:icon="@drawable/ic_drawer_search"
             android:title="Buscar" />
 
         <item
@@ -25,18 +26,13 @@
             <menu>
                 <item
                     android:id="@+id/nav_agregar_moto"
-                    android:icon="@android:drawable/ic_lock_power_off"
+                    android:icon="@drawable/ic_drawer_moto"
                     android:title="Agregar Moto"
                     />
                 <item
                     android:id="@+id/nav_actualizar_moto"
-                    android:icon="@android:drawable/ic_lock_power_off"
+                    android:icon="@drawable/ic_drawer_moto"
                     android:title="Actualizar Moto"
-                    />
-                <item
-                    android:id="@+id/nav_agregar_marca"
-                    android:icon="@android:drawable/ic_lock_power_off"
-                    android:title="Agregar Marca"
                     />
             </menu>
         </item>
@@ -46,11 +42,11 @@
         <menu>
             <item
                 android:id="@+id/nav_preferencias"
-                android:icon="@android:drawable/stat_sys_headset"
+                android:icon="@drawable/ic_drawer_preferencias"
                 android:title="Preferencias" />
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@android:drawable/btn_star_big_on"
+                android:icon="@drawable/ic_drawer_logout"
                 android:title="Logout" />
         </menu>
     </item>

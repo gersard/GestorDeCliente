@@ -1,20 +1,17 @@
 package com.example.gerardo.gestordeclientes.ui.fragment;
 
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -24,6 +21,9 @@ import com.example.gerardo.gestordeclientes.Funciones;
 import com.example.gerardo.gestordeclientes.R;
 import com.example.gerardo.gestordeclientes.adapter.ListaClientesAdapter;
 import com.example.gerardo.gestordeclientes.model.Cliente;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
@@ -31,9 +31,6 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,6 +53,8 @@ public class BuscarFragment extends Fragment {
 
     ListaClientesAdapter adapter;
     String parametro;
+    @Bind(R.id.obs_scrollview)
+    ObservableScrollView obsScrollview;
 
     public BuscarFragment() {
         // Required empty public constructor
@@ -74,6 +73,7 @@ public class BuscarFragment extends Fragment {
         spnParametro.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                txtValor.setText(item.toString());
                 parametro = item.toString().toLowerCase();
             }
         });
@@ -91,24 +91,25 @@ public class BuscarFragment extends Fragment {
 
     @OnClick(R.id.btn_buscar)
     public void onClick() {
-        new AsyncTaskBuscarCliente().execute(parametro,editValor.getText().toString());
+        new AsyncTaskBuscarCliente().execute(parametro, editValor.getText().toString());
     }
 
     private class AsyncTaskBuscarCliente extends AsyncTask<String, Void, Void> {
         ProgressDialog dialog = new ProgressDialog(getContext());
         ArrayList<Cliente> cl;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             dialog.setMessage("Buscando...");
             dialog.setCancelable(false);
             dialog.show();
-            cl = new ArrayList<>(Funciones.getClientesPorParametro(parametro,editValor.getText().toString().trim()));
+            cl = new ArrayList<>(Funciones.getClientesPorParametro(parametro, editValor.getText().toString().trim()));
         }
 
         @Override
         protected Void doInBackground(String... params) {
-            adapter = new ListaClientesAdapter(getContext(),cl);
+            adapter = new ListaClientesAdapter(getContext(), cl);
             return null;
         }
 
