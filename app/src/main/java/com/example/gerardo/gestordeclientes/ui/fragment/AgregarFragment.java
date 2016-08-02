@@ -132,7 +132,7 @@ public class AgregarFragment extends Fragment {
 
             if (validarIngreso(nombre, rut, apellido, telefono, correo, comuna, marca, modelo, año)) {
                 if (Funciones.validarRut(rut)) {
-                    if (!Funciones.validarIfClientExist(rut)){
+                    if (!Funciones.validarIfClientExist(rut)) {
                         Cliente cliente = new Cliente();
                         cliente.setNombre(nombre);
                         cliente.setRut(rut);
@@ -157,7 +157,7 @@ public class AgregarFragment extends Fragment {
 
                         new AsyncTaskRegistrarCliente().execute(cliente);
                         Toast.makeText(getActivity(), "Cliente agregado exitosamente", Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else {
                         Toast.makeText(getActivity(), "Cliente ya se encuentra registrado", Toast.LENGTH_SHORT).show();
                     }
 
@@ -206,6 +206,7 @@ public class AgregarFragment extends Fragment {
         return true;
 
     }
+
     private void rellenarSpinners() {
         //SPINNER COMUNA
         spnComuna.setItems(getActivity().getResources().getStringArray(R.array.comunas));
@@ -228,14 +229,19 @@ public class AgregarFragment extends Fragment {
         spnModeloMoto.setItems(modelos);
 
     }
+
     private void rellenarSpinnerModelo(String marca) {
+        try {
+            Marca m = Funciones.getModelosByMarca(marca);
 
-        Marca m = Funciones.getModelosByMarca(marca);
-
-        for (Modelo n : m.getModelos()) {
-            modelos.add(n.getNombreModelo());
+            for (Modelo n : m.getModelos()) {
+                modelos.add(n.getNombreModelo());
+            }
+            spnModeloMoto.setItems(modelos);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
-        spnModeloMoto.setItems(modelos);
+
     }
 
 

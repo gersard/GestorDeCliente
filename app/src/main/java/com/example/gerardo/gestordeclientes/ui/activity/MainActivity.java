@@ -15,7 +15,9 @@ import com.example.gerardo.gestordeclientes.R;
 import com.example.gerardo.gestordeclientes.ui.fragment.AgregarFragment;
 import com.example.gerardo.gestordeclientes.ui.fragment.AgregarMotoFragment;
 import com.example.gerardo.gestordeclientes.ui.fragment.BuscarFragment;
+import com.example.gerardo.gestordeclientes.ui.fragment.EstadisticaFragment;
 import com.example.gerardo.gestordeclientes.ui.fragment.MainFragment;
+import com.example.gerardo.gestordeclientes.ui.fragment.PreferenciasFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -68,10 +70,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = new AgregarFragment();
                 title = "Registrar Cliente";
                 break;
-//            case R.id.nav_actualizar:
-//                fragment = new BuscarFragment();
-//                title = "Buscar Cliente";
-//                break;
+            case R.id.nav_actualizar:
+                fragment = new EstadisticaFragment();
+                title = "Buscar Cliente";
+                break;
             case R.id.nav_buscar:
                 fragment = new BuscarFragment();
                 title = "Buscar Cliente";
@@ -79,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_agregar_moto:
                 fragment = new AgregarMotoFragment();
                 title = "Agregar Moto";
+                break;
+            case R.id.nav_preferencias:
+                fragment = new PreferenciasFragment();
+                title = "Preferencias";
                 break;
         }
 

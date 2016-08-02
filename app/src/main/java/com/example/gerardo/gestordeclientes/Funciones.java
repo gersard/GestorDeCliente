@@ -1,5 +1,7 @@
 package com.example.gerardo.gestordeclientes;
 
+import android.content.Context;
+
 import com.example.gerardo.gestordeclientes.model.Cliente;
 import com.example.gerardo.gestordeclientes.model.Marca;
 import com.example.gerardo.gestordeclientes.model.Modelo;
@@ -111,10 +113,9 @@ public final class Funciones {
 
                 Moto moto = realm.createObject(Moto.class);
                 moto.setIdMoto(fecha);
-                Marca marca = realm.createObject(Marca.class);
-                marca.setNombreMarca(clienteExt.getMoto().getMarca().getNombreMarca());
-                Modelo modelo = realm.createObject(Modelo.class);
-                modelo.setNombreModelo(clienteExt.getMoto().getModelo().getNombreModelo());
+                Marca marca = realm.where(Marca.class).equalTo("nombreMarca",clienteExt.getMoto().getMarca().getNombreMarca()).findFirst();
+                Modelo modelo = realm.where(Modelo.class).equalTo("nombreModelo",clienteExt.getMoto().getModelo().getNombreModelo()).findFirst();
+
                 moto.setMarca(marca);
                 moto.setModelo(modelo);
                 moto.setAño(clienteExt.getMoto().getAño());
@@ -200,21 +201,46 @@ public final class Funciones {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                Marca marca = realm.createObject(Marca.class);
-                marca.setIdMarca(fecha);
-                marca.setNombreMarca(nMarca);
+                String nombreMarca = nMarca.substring(0, 1).toUpperCase() + nMarca.substring(1);
+                String nombreModelo = nModelo.substring(0, 1).toUpperCase() + nModelo.substring(1);
+
+                Marca marca = realm.where(Marca.class).equalTo("nombreMarca",nombreMarca).findFirst();
 
                 Modelo modelo = realm.createObject(Modelo.class);
                 modelo.setIdModelo(fecha);
-                modelo.setNombreModelo(nModelo);
+                modelo.setNombreModelo(nombreModelo);
 
-                RealmList<Modelo> lModelo = new RealmList<>();
-                lModelo.add(modelo);
+                RealmList<Modelo> lModelo;
+                if (marca == null){
+                    Marca marca1 = realm.createObject(Marca.class);
+                    marca1.setIdMarca(fecha);
+                    marca1.setNombreMarca(nMarca);
 
-                marca.setModelos(lModelo);
+                    lModelo = new RealmList<>();
+                    lModelo.add(modelo);
+                    marca1.setModelos(lModelo);
+                }else{
+                    lModelo = marca.getModelos();
+                    lModelo.add(modelo);
+                    marca.setModelos(lModelo);
+                }
+
             }
         });
     }
+
+
+    //METODOS GENERALES
+    public static void eliminarDatos(){
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.deleteAll();
+            }
+        });
+    }
+
 
 //    public static void addMarca(){
 //        final String fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
